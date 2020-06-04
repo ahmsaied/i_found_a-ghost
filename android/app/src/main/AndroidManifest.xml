@@ -9,6 +9,8 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="i_found_a_ghost"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD6awUzos8KXb6NdtczQ1PY7zWLE1e1HTM"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
