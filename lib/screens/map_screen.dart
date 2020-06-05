@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
+import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:I_found_a_ghost/screens/inputs_screen.dart';
 
 class Map extends StatefulWidget {
   static const String id = 'map_screen';
+  static double longitude;
+  static double latitude;
+  //Map({@required this.latitude, @required this.longitude});
+  Map(double latitude, double longitude) {
+    Map.latitude ??= latitude;
+    Map.longitude ??= longitude;
+  }
 
   @override
   _MapState createState() => _MapState();
@@ -12,19 +22,20 @@ class Map extends StatefulWidget {
 class _MapState extends State<Map> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
   static final CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(Map.latitude, Map.longitude),
       tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+      zoom: 190.151926040649414);
 
   @override
   Widget build(BuildContext context) {
+    List<Marker> allMarker = [
+      Marker(
+        markerId: MarkerId('firstMarker'),
+        position: LatLng(Map.latitude, Map.longitude),
+      ),
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.yellow[200],
@@ -36,17 +47,19 @@ class _MapState extends State<Map> {
         ),
       ),
       body: GoogleMap(
+        markers: Set.from(allMarker),
         mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
+        initialCameraPosition: CameraPosition(
+            target: LatLng(Map.latitude, Map.longitude), zoom: 14.4746),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
-      ),
+//      floatingActionButton: FloatingActionButton.extended(
+//        onPressed: _goToTheLake,
+//        label: Text('To the lake!'),
+//        icon: Icon(Icons.directions_boat),
+//      ),
     );
   }
 

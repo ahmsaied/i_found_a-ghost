@@ -14,7 +14,7 @@ class GhostApp extends StatelessWidget {
       home: InputsPage(),
       routes: {
         InputsPage.id: (context) => InputsPage(),
-        Map.id: (context) => Map(),
+        Map.id: (context) => Map(Map.latitude, Map.longitude),
       },
       initialRoute: InputsPage.id,
     );

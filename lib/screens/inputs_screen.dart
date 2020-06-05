@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:I_found_a_ghost/screens/map_screen.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:I_found_a_ghost/user_current_location.dart';
+
+Position position;
 
 class InputsPage extends StatefulWidget {
   static const String id = 'inputs_screen';
+
   @override
   _InputsPageState createState() => _InputsPageState();
 }
 
 class _InputsPageState extends State<InputsPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    UserCurrentLocation.getCurrentUserLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,8 +94,17 @@ class _InputsPageState extends State<InputsPage> {
                 height: 20.0,
               ),
               RaisedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, Map.id);
+                onPressed: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Map(
+                              UserCurrentLocation.userLatitude,
+                              UserCurrentLocation.userLongitude)));
+
+                  UserCurrentLocation.getCurrentUserLocation();
+
+                  //print(position);
                 },
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0.0),
