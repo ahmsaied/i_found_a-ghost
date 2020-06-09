@@ -46,12 +46,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/
+    - assets/images/
 
   fonts:
     - family: Bauhaus
       fonts:
-        - asset: fonts/bauhaus 93 regular.ttf
+        - asset: assets/fonts/bauhaus_93_regular.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

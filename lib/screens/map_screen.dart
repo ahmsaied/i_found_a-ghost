@@ -26,7 +26,7 @@ class _MapState extends State<Map> {
       bearing: 192.8334901395799,
       target: LatLng(Map.latitude, Map.longitude),
       tilt: 59.440717697143555,
-      zoom: 190.151926040649414);
+      zoom: 90.151926040649414);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _MapState extends State<Map> {
         markers: Set.from(allMarker),
         mapType: MapType.hybrid,
         initialCameraPosition: CameraPosition(
-            target: LatLng(Map.latitude, Map.longitude), zoom: 14.4746),
+            target: LatLng(Map.latitude, Map.longitude), zoom: 90.4746),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },

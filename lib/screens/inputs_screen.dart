@@ -35,15 +35,19 @@ class _InputsPageState extends State<InputsPage> {
       backgroundColor: Colors.blueGrey[50],
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+          margin: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Expanded(
-                flex: 3,
-                child: Form(
+                //flex: 3,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  reverse: true,
                   child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
                     decoration: InputDecoration(
                       hintText: 'What! tell me more ',
                       border: const OutlineInputBorder(),
