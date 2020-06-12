@@ -30,11 +30,11 @@ class UserCurrentLocation {
 
     _locationData = await location.getLocation();
 
-    location.onLocationChanged.listen((LocationData currentLocation) {
-      print(currentLocation);
-      userLatitude = currentLocation.latitude;
-      userLongitude = currentLocation.longitude;
+    location.onLocationChanged.listen((LocationData _locationData) {
+      // print(_locationData);
       // Use current location
+      userLatitude = _locationData.latitude;
+      userLongitude = _locationData.longitude;
     });
   }
 }

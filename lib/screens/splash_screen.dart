@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:I_found_a_ghost/screens/inputs_screen.dart';
-import 'package:I_found_a_ghost/screens/map_screen.dart';
 import 'package:I_found_a_ghost/bloc/my_navigator.dart';
+import 'package:I_found_a_ghost/user_current_location.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = 'splash_screen';
@@ -14,7 +13,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () => MyNavigator.goToInputPage(context));
+    UserCurrentLocation.getCurrentUserLocation();
+    Timer(Duration(seconds: 5), () => MyNavigator.goToMap(this.context));
   }
 
   @override

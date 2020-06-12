@@ -13,19 +13,12 @@ class GhostApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashScreen(),
-      routes: routes,
-
-//      {
-//        SplashScreen.id: (context) => SplashScreen(),
-//        InputsPage.id: (context) => InputsPage(),
-//        Map.id: (context) => Map(Map.latitude, Map.longitude),
-//      },
+      routes: {
+        SplashScreen.id: (BuildContext context) => SplashScreen(),
+        InputsPage.id: (BuildContext context) => InputsPage(),
+        Map.id: (BuildContext context) => Map(),
+      },
       initialRoute: SplashScreen.id,
     );
   }
 }
-
-var routes = <String, WidgetBuilder>{
-  SplashScreen.id: (BuildContext context) => SplashScreen(),
-  InputsPage.id: (BuildContext context) => InputsPage(),
-};

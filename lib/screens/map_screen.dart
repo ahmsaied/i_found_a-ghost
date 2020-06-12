@@ -1,19 +1,19 @@
+import 'package:I_found_a_ghost/user_current_location.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:I_found_a_ghost/screens/inputs_screen.dart';
+import 'package:I_found_a_ghost/screens/user_entry.dart';
 
 class Map extends StatefulWidget {
   static const String id = 'map_screen';
-  static double longitude;
-  static double latitude;
-  //Map({@required this.latitude, @required this.longitude});
-  Map(double latitude, double longitude) {
-    Map.latitude ??= latitude;
-    Map.longitude ??= longitude;
-  }
+//  double longitude;
+//  double latitude;
+//  Map({this.latitude, this.longitude});
+////  Map(double latitude, double longitude) {
+////    Map.latitude ??= latitude;
+////    Map.longitude ??= longitude;
+//  }
 
   @override
   _MapState createState() => _MapState();
@@ -22,18 +22,13 @@ class Map extends StatefulWidget {
 class _MapState extends State<Map> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(Map.latitude, Map.longitude),
-      tilt: 59.440717697143555,
-      zoom: 90.151926040649414);
-
   @override
   Widget build(BuildContext context) {
     List<Marker> allMarker = [
       Marker(
         markerId: MarkerId('firstMarker'),
-        position: LatLng(Map.latitude, Map.longitude),
+        position: LatLng(UserCurrentLocation.userLatitude,
+            UserCurrentLocation.userLongitude),
       ),
     ];
     return Scaffold(
@@ -46,25 +41,67 @@ class _MapState extends State<Map> {
           ),
         ),
       ),
-      body: GoogleMap(
-        markers: Set.from(allMarker),
-        mapType: MapType.hybrid,
-        initialCameraPosition: CameraPosition(
-            target: LatLng(Map.latitude, Map.longitude), zoom: 90.4746),
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              child: GoogleMap(
+                markers: Set.from(allMarker),
+                mapType: MapType.hybrid,
+                initialCameraPosition: CameraPosition(
+                    target: LatLng(UserCurrentLocation.userLatitude,
+                        UserCurrentLocation.userLongitude),
+                    zoom: 80.4746),
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
+              ),
+            ),
+            DraggableScrollableSheet(
+              expand: true,
+              initialChildSize: 0.4,
+              minChildSize: 0.2,
+              maxChildSize: 0.8,
+              builder: (context, scrollController) {
+                return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
+                    ),
+                    color: Colors.white,
+                  ),
+                  //child: userEntry(),
+                  child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1),
+                      controller: scrollController,
+                      itemCount: 1,
+                      itemBuilder: (context, index) {
+                        return UserEntery.userEntry();
+                      }),
+                );
+              },
+            ),
+          ],
+        ),
       ),
-//      floatingActionButton: FloatingActionButton.extended(
-//        onPressed: _goToTheLake,
-//        label: Text('To the lake!'),
-//        icon: Icon(Icons.directions_boat),
-//      ),
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
+//  Widget cardsWidget(itemIndex) => Container(
+//        margin: EdgeInsets.all(24.0),
+//        decoration: BoxDecoration(
+//          color: Color.fromRGBO(250, 124, 107, 1),
+//          borderRadius: BorderRadius.all(
+//            Radius.circular(20.0),
+//          ),
+//        ),
+//        child: Column(
+//          mainAxisAlignment: MainAxisAlignment.spaceAround,
+//          crossAxisAlignment: CrossAxisAlignment.start,
+//          children: <Widget>[],
+//        ),
+//      );
+
 }
