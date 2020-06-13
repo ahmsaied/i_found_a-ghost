@@ -4,10 +4,14 @@ import 'package:I_found_a_ghost/screens/map_screen.dart';
 
 class MyNavigator {
   static void goToMap(BuildContext context) {
-    Navigator.pushNamed(context, Map.id);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => Map()),
+    );
   }
 
   static void goToInputPage(BuildContext context) {
-    Navigator.pushNamed(context, InputsPage.id);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => InputsPage()),
+    );
   }
 }

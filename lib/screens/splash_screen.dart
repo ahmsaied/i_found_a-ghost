@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:I_found_a_ghost/bloc/my_navigator.dart';
-import 'package:I_found_a_ghost/user_current_location.dart';
+import 'package:I_found_a_ghost/bloc/user_current_location.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = 'splash_screen';

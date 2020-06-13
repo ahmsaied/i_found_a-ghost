@@ -1,4 +1,4 @@
-import 'package:I_found_a_ghost/user_current_location.dart';
+import 'package:I_found_a_ghost/bloc/user_current_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
